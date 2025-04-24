@@ -1,0 +1,14 @@
+# This file is likely redundant if using pyproject.toml for dependencies.
+# Keeping it minimal and aligned with pyproject.toml base dependencies.
+
+PyQt6>=6.6.0
+PyQt6-WebEngine>=6.6.0
+PyQt6-Multimedia>=6.6.0
+markdown>=3.5.0
+Pygments>=2.15.0
+pymdown-extensions>=10.0
+google-api-python-client>=2.90.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.1.0
+send2trash>=1.8.0
+pyperclip>=1.8.0

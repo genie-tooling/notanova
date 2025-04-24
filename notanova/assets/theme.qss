@@ -1,0 +1,765 @@
+/* === NotaNova QSS Theme v2.0 === */
+/* Author: QSS_UI_Design_Maestro */
+
+/* ==========================================================================
+   1. Design Tokens (Custom Properties)
+   ========================================================================== */
+* {
+    /* Base Font Size - Applied globally in code usually, but can be set here */
+    /* font-size: 10pt; */
+
+    /* --- Spacing --- */
+    --spacing-xs: 2px;
+    --spacing-sm: 4px;
+    --spacing-md: 8px;
+    --spacing-lg: 12px;
+    --spacing-xl: 16px;
+
+    /* --- Borders & Radius --- */
+    --radius-sm: 3px;
+    --radius-base: 5px;
+    --radius-lg: 8px;
+    --border-width: 1px;
+
+    /* --- Light Theme Colors --- */
+    --bg-base-light: #ffffff;       /* Main background */
+    --bg-alt-light: #f1f3f5;        /* Alternate bg (lists, toolbars) */
+    --bg-inset-light: #e9ecef;      /* Inset bg (inputs, groups) */
+    --bg-accent-light: #0d6efd;     /* Primary accent */
+    --bg-hover-light: #e2e6ea;      /* Subtle hover */
+    --bg-selected-light: #cfe2ff;   /* Selection / Selected Tab */
+    --bg-selected-inactive-light: #dee2e6; /* Inactive selection */
+    --bg-disabled-light: #e9ecef;
+
+    --fg-base-light: #212529;       /* Main text */
+    --fg-muted-light: #6c757d;      /* Secondary text (status, disabled) */
+    --fg-accent-light: #ffffff;     /* Text on accent background */
+    --fg-selected-light: #052c65;   /* Text on selected background */
+    --fg-link-light: #0d6efd;
+
+    --border-base-light: #ced4da;   /* Default borders */
+    --border-accent-light: #86b7fe; /* Focus / Accent borders */
+    --border-strong-light: #adb5bd; /* Stronger borders */
+
+    /* --- Dark Theme Colors --- */
+    --bg-base-dark: #212529;        /* Main background */
+    --bg-alt-dark: #2b3035;         /* Alternate bg */
+    --bg-inset-dark: #343a40;       /* Inset bg */
+    --bg-accent-dark: #0d6efd;      /* Primary accent (can keep same or adjust) */
+    --bg-hover-dark: #495057;       /* Subtle hover */
+    --bg-selected-dark: #0b5ed7;    /* Selection / Selected Tab */
+    --bg-selected-inactive-dark: #414e6e; /* Inactive selection */
+    --bg-disabled-dark: #343a40;
+
+    --fg-base-dark: #dee2e6;        /* Main text */
+    --fg-muted-dark: #adb5bd;       /* Secondary text */
+    --fg-accent-dark: #ffffff;      /* Text on accent background */
+    --fg-selected-dark: #ffffff;    /* Text on selected background */
+    --fg-link-dark: #6ea8fe;        /* Lighter link for dark bg */
+
+    --border-base-dark: #495057;    /* Default borders */
+    --border-accent-dark: #4d7eff;  /* Focus / Accent borders */
+    --border-strong-dark: #6c757d;  /* Stronger borders */
+
+    /* --- Assign Colors Based on Theme --- */
+    /* Default to Light */
+    --bg-base: var(--bg-base-light);
+    --bg-alt: var(--bg-alt-light);
+    --bg-inset: var(--bg-inset-light);
+    --bg-accent: var(--bg-accent-light);
+    --bg-hover: var(--bg-hover-light);
+    --bg-selected: var(--bg-selected-light);
+    --bg-selected-inactive: var(--bg-selected-inactive-light);
+    --bg-disabled: var(--bg-disabled-light);
+
+    --fg-base: var(--fg-base-light);
+    --fg-muted: var(--fg-muted-light);
+    --fg-accent: var(--fg-accent-light);
+    --fg-selected: var(--fg-selected-light);
+    --fg-link: var(--fg-link-light);
+
+    --border-base: var(--border-base-light);
+    --border-accent: var(--border-accent-light);
+    --border-strong: var(--border-strong-light);
+
+    --selection-bg: var(--bg-selected-light);
+    --selection-fg: var(--fg-selected-light);
+}
+
+/* Dark Mode Overrides */
+*[darkMode="true"] {
+    --bg-base: var(--bg-base-dark);
+    --bg-alt: var(--bg-alt-dark);
+    --bg-inset: var(--bg-inset-dark);
+    --bg-accent: var(--bg-accent-dark);
+    --bg-hover: var(--bg-hover-dark);
+    --bg-selected: var(--bg-selected-dark);
+    --bg-selected-inactive: var(--bg-selected-inactive-dark);
+    --bg-disabled: var(--bg-disabled-dark);
+
+    --fg-base: var(--fg-base-dark);
+    --fg-muted: var(--fg-muted-dark);
+    --fg-accent: var(--fg-accent-dark);
+    --fg-selected: var(--fg-selected-dark);
+    --fg-link: var(--fg-link-dark);
+
+    --border-base: var(--border-base-dark);
+    --border-accent: var(--border-accent-dark);
+    --border-strong: var(--border-strong-dark);
+
+    --selection-bg: var(--bg-selected-dark);
+    --selection-fg: var(--fg-selected-dark);
+}
+
+/* ==========================================================================
+   2. Global Widget Styles
+   ========================================================================== */
+QWidget {
+    color: var(--fg-base);
+    background-color: transparent; /* Let children define backgrounds */
+    border: none;
+    selection-background-color: var(--selection-bg);
+    selection-color: var(--selection-fg);
+}
+
+QMainWindow, QDialog {
+    background-color: var(--bg-base);
+}
+
+/* ToolTips */
+QToolTip {
+    background-color: var(--bg-alt);
+    color: var(--fg-base);
+    border: var(--border-width) solid var(--border-base);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    opacity: 230; /* Slight transparency */
+}
+
+/* ==========================================================================
+   3. Input Widgets (QLineEdit, QSpinBox, QComboBox)
+   ========================================================================== */
+QLineEdit, QSpinBox, QDateTimeEdit, QDateEdit, QTimeEdit, QFontComboBox {
+    background-color: var(--bg-inset);
+    color: var(--fg-base);
+    border: var(--border-width) solid var(--border-base);
+    border-radius: var(--radius-base);
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-height: 1.8em; /* Consistent height */
+}
+
+QLineEdit:focus, QSpinBox:focus, QDateTimeEdit:focus, QDateEdit:focus, QTimeEdit:focus, QFontComboBox:focus {
+    border-color: var(--border-accent);
+    /* Optional: subtle inner shadow or glow? */
+}
+
+QLineEdit:disabled, QSpinBox:disabled, QDateTimeEdit:disabled, QDateEdit:disabled, QTimeEdit:disabled, QFontComboBox:disabled {
+    background-color: var(--bg-disabled);
+    color: var(--fg-muted);
+    border-color: var(--border-base);
+}
+
+QLineEdit[readOnly="true"] {
+    background-color: var(--bg-alt);
+    color: var(--fg-muted);
+    border-color: var(--border-base);
+}
+
+/* SpinBox Buttons */
+QSpinBox::up-button, QSpinBox::down-button {
+    /* Using system default arrows is often best */
+    subcontrol-origin: border;
+    width: 18px;
+    border-radius: var(--radius-sm);
+}
+QSpinBox::up-button { subcontrol-position: top right; margin: 1px 1px 0px 1px; }
+QSpinBox::down-button { subcontrol-position: bottom right; margin: 0px 1px 1px 1px; }
+QSpinBox::up-button:hover, QSpinBox::down-button:hover { background-color: var(--bg-hover); }
+QSpinBox::up-button:pressed, QSpinBox::down-button:pressed { background-color: var(--border-base); }
+QSpinBox::up-arrow, QSpinBox::down-arrow { width: 9px; height: 9px; }
+QSpinBox::up-arrow { image: url(:/qt-project.org/styles/commonstyle/images/up-arrow-light.png); } /* Adapt paths if needed */
+QSpinBox::down-arrow { image: url(:/qt-project.org/styles/commonstyle/images/down-arrow-light.png); }
+QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { image: url(:/qt-project.org/styles/commonstyle/images/up-arrow-disabled-light.png); }
+QSpinBox::down-arrow:disabled, QSpinBox::down-arrow:off { image: url(:/qt-project.org/styles/commonstyle/images/down-arrow-disabled-light.png); }
+
+/* ComboBox */
+QComboBox {
+    /* Base style inherited */
+    padding-right: 25px; /* Space for the arrow */
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 22px;
+    border-left-width: var(--border-width);
+    border-left-color: var(--border-base);
+    border-left-style: solid;
+    border-top-right-radius: var(--radius-base);
+    border-bottom-right-radius: var(--radius-base);
+    background-color: transparent;
+}
+
+QComboBox::down-arrow {
+    image: url(:/qt-project.org/styles/commonstyle/images/down-arrow-light.png);
+    width: 10px;
+    height: 10px;
+}
+*[darkMode="true"] QComboBox::down-arrow {
+    image: url(:/qt-project.org/styles/commonstyle/images/down-arrow-dark.png);
+}
+
+QComboBox::drop-down:hover {
+    background-color: var(--bg-hover);
+}
+
+QComboBox QAbstractItemView { /* The dropdown list */
+    background-color: var(--bg-base);
+    color: var(--fg-base);
+    border: var(--border-width) solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs);
+    outline: 0px; /* Remove focus outline */
+}
+QComboBox QAbstractItemView::item {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+}
+QComboBox QAbstractItemView::item:selected { /* Hover state in dropdown */
+    background-color: var(--bg-selected);
+    color: var(--fg-selected);
+}
+
+/* ==========================================================================
+   4. Buttons (QPushButton, QToolButton)
+   ========================================================================== */
+QPushButton {
+    background-color: var(--bg-inset);
+    color: var(--fg-base);
+    border: var(--border-width) solid var(--border-base);
+    border-radius: var(--radius-base);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    min-width: 5em;
+    min-height: 1.8em;
+    outline: none;
+}
+
+QPushButton:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--border-strong);
+}
+
+QPushButton:pressed {
+    background-color: var(--border-base); /* Slightly darker */
+    border-color: var(--border-strong);
+    color: var(--fg-base); /* Ensure text is still readable */
+}
+
+QPushButton:focus {
+    border-color: var(--border-accent);
+}
+
+QPushButton:disabled {
+    background-color: var(--bg-disabled);
+    color: var(--fg-muted);
+    border-color: var(--border-base);
+}
+
+QPushButton:checked { /* For toggle buttons */
+    background-color: var(--bg-selected);
+    color: var(--fg-selected);
+    border-color: var(--bg-accent);
+}
+QPushButton:checked:hover {
+    background-color: #b8d6ff; /* Slightly lighter blue */
+}
+*[darkMode="true"] QPushButton:checked:hover {
+    background-color: #0a58ca;
+}
+
+
+/* ToolButtons */
+QToolButton {
+    background-color: transparent;
+    color: var(--fg-base);
+    border: var(--border-width) solid transparent; /* Reserve space but hide border */
+    border-radius: var(--radius-base);
+    padding: var(--spacing-sm);
+    margin: 1px;
+    outline: none;
+}
+
+QToolButton:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--border-base);
+}
+
+QToolButton:pressed {
+    background-color: var(--border-base);
+    border-color: var(--border-strong);
+}
+
+QToolButton:checked {
+    background-color: var(--bg-selected);
+    color: var(--fg-selected);
+    border-color: var(--border-accent);
+}
+
+QToolButton:disabled {
+    color: var(--fg-muted);
+    background-color: transparent;
+    border-color: transparent;
+}
+
+QToolButton[popupMode="1"] { /* Has dropdown menu */
+    padding-right: 18px; /* Space for arrow */
+}
+QToolButton::menu-indicator {
+    image: url(:/qt-project.org/styles/commonstyle/images/down-arrow-light.png);
+    subcontrol-origin: padding;
+    subcontrol-position: center right; /* Changed from bottom right */
+    right: 4px; /* Adjust spacing */
+    width: 10px; height: 10px; /* Explicit size */
+}
+*[darkMode="true"] QToolButton::menu-indicator {
+    image: url(:/qt-project.org/styles/commonstyle/images/down-arrow-dark.png);
+}
+
+QToolButton#qt_toolbar_ext_button { /* Toolbar extension button */
+    margin: 0px; padding: 0px; border: none;
+}
+
+
+/* ==========================================================================
+   5. TextEdit & Preview
+   ========================================================================== */
+QTextEdit, QWebEngineView {
+    background-color: var(--bg-base);
+    color: var(--fg-base);
+    border: var(--border-width) solid var(--border-base);
+    border-radius: var(--radius-base);
+    padding: var(--spacing-md);
+}
+
+QTextEdit:focus {
+    border-color: var(--border-accent);
+}
+
+/* Style the preview directly if needed, but HTML template handles most */
+QWebEngineView {
+    /* Base styles applied */
+}
+
+/* ==========================================================================
+   6. TreeView (Notebook Tree)
+   ========================================================================== */
+QTreeView {
+    background-color: var(--bg-alt);
+    alternate-background-color: var(--bg-base); /* Subtle striping */
+    border: var(--border-width) solid var(--border-base);
+    border-radius: var(--radius-base);
+    padding: var(--spacing-xs);
+    outline: 0px; /* Remove focus outline */
+}
+
+QTreeView::item {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    min-height: 1.5em; /* Ensure items are tall enough */
+}
+
+QTreeView::item:hover {
+    background-color: var(--bg-hover);
+}
+
+QTreeView::item:selected {
+    background-color: var(--bg-selected);
+    color: var(--fg-selected);
+}
+
+QTreeView::item:selected:!active { /* When tree doesn't have focus */
+    background-color: var(--bg-selected-inactive);
+    color: var(--fg-muted);
+}
+
+QTreeView::branch {
+    /* Use system theme icons by default, difficult to style reliably with QSS */
+    background: transparent;
+}
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings {
+        image: url(:/qt-project.org/styles/commonstyle/images/branch-closed-light.png);
+}
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings  {
+        image: url(:/qt-project.org/styles/commonstyle/images/branch-open-light.png);
+}
+*[darkMode="true"] QTreeView::branch:has-children:!has-siblings:closed,
+*[darkMode="true"] QTreeView::branch:closed:has-children:has-siblings {
+        image: url(:/qt-project.org/styles/commonstyle/images/branch-closed-dark.png);
+}
+*[darkMode="true"] QTreeView::branch:open:has-children:!has-siblings,
+*[darkMode="true"] QTreeView::branch:open:has-children:has-siblings  {
+        image: url(:/qt-project.org/styles/commonstyle/images/branch-open-dark.png);
+}
+
+
+/* ==========================================================================
+   7. TabWidget
+   ========================================================================== */
+QTabWidget::pane {
+    border: var(--border-width) solid var(--border-base);
+    border-top: none; /* Pane border overlaps with tab bar bottom border */
+    background-color: var(--bg-base);
+    padding: var(--spacing-md);
+    border-bottom-left-radius: var(--radius-base);
+    border-bottom-right-radius: var(--radius-base);
+}
+
+QTabBar {
+    qproperty-drawBase: 0; /* Remove the default tab bar base line */
+    left: var(--spacing-md); /* Indent tabs slightly */
+    border: none;
+}
+
+QTabBar::tab {
+    background-color: var(--bg-alt);
+    color: var(--fg-muted);
+    border: var(--border-width) solid var(--border-base);
+    border-bottom: none; /* Tab connects to pane */
+    padding: var(--spacing-sm) var(--spacing-lg);
+    margin-right: 1px;
+    border-top-left-radius: var(--radius-base);
+    border-top-right-radius: var(--radius-base);
+    min-width: 80px;
+    max-width: 220px; /* Prevent tabs becoming too wide */
+}
+
+QTabBar::tab:!selected {
+    margin-top: var(--spacing-xs); /* Make non-selected tabs slightly lower */
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: var(--bg-hover);
+    color: var(--fg-base);
+}
+
+QTabBar::tab:selected {
+    background-color: var(--bg-base); /* Match pane background */
+    color: var(--fg-base);
+    border-bottom: var(--border-width) solid var(--bg-base); /* Blend bottom border */
+    font-weight: bold;
+    margin-bottom: -1px; /* Overlap pane border */
+}
+
+QTabBar::close-button {
+    /* Use themed icon if possible, or style directly */
+    /* image: url(...); */
+    icon-size: 10px;
+    subcontrol-position: right;
+    padding: var(--spacing-xs);
+    margin-left: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    background: transparent;
+}
+QTabBar::close-button:hover {
+    background-color: #f77; /* Consider theme variables */
+}
+QTabBar::close-button:pressed {
+    background-color: #f44;
+}
+*[darkMode="true"] QTabBar::close-button:hover {
+    background-color: #c44;
+}
+
+QTabBar QToolButton { /* Scroll buttons */
+    background-color: var(--bg-alt);
+    border: var(--border-width) solid var(--border-base);
+    border-radius: var(--radius-sm);
+    padding: 3px;
+    margin: 2px;
+}
+QTabBar QToolButton:hover { background-color: var(--bg-hover); }
+QTabBar QToolButton:pressed { background-color: var(--border-base); }
+QTabBar QToolButton::left-arrow { image: url(:/qt-project.org/styles/commonstyle/images/left-arrow-light.png); }
+QTabBar QToolButton::right-arrow { image: url(:/qt-project.org/styles/commonstyle/images/right-arrow-light.png); }
+*[darkMode="true"] QTabBar QToolButton::left-arrow { image: url(:/qt-project.org/styles/commonstyle/images/left-arrow-dark.png); }
+*[darkMode="true"] QTabBar QToolButton::right-arrow { image: url(:/qt-project.org/styles/commonstyle/images/right-arrow-dark.png); }
+
+/* ==========================================================================
+   8. ScrollBars
+   ========================================================================== */
+QScrollBar {
+    border: none;
+    background-color: var(--bg-base); /* Match parent usually */
+    border-radius: var(--radius-sm);
+}
+QScrollBar:vertical { width: 12px; margin: 0; }
+QScrollBar:horizontal { height: 12px; margin: 0; }
+
+QScrollBar::handle {
+    background-color: var(--border-base);
+    border-radius: var(--radius-sm);
+}
+QScrollBar::handle:vertical { min-height: 30px; }
+QScrollBar::handle:horizontal { min-width: 30px; }
+
+QScrollBar::handle:hover {
+    background-color: var(--border-strong);
+}
+QScrollBar::handle:pressed {
+    background-color: var(--fg-muted);
+}
+
+/* Hide add/sub line buttons */
+QScrollBar::add-line, QScrollBar::sub-line {
+    height: 0px; width: 0px;
+    subcontrol-position: none;
+    subcontrol-origin: margin;
+}
+/* Remove space from add/sub page (area around handle) */
+QScrollBar::add-page, QScrollBar::sub-page {
+    background: none;
+}
+
+/* Dark Scrollbars */
+*[darkMode="true"] QScrollBar::handle { background-color: var(--border-strong); }
+*[darkMode="true"] QScrollBar::handle:hover { background-color: var(--fg-muted); }
+*[darkMode="true"] QScrollBar::handle:pressed { background-color: var(--fg-base); }
+
+
+/* ==========================================================================
+   9. MenuBar & Menu
+   ========================================================================== */
+QMenuBar {
+    background-color: var(--bg-alt);
+    color: var(--fg-base);
+    border-bottom: var(--border-width) solid var(--border-base);
+    padding: var(--spacing-xs);
+}
+
+QMenuBar::item {
+    background: transparent;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+}
+
+QMenuBar::item:selected { /* Hover */
+    background-color: var(--bg-hover);
+    color: var(--fg-base);
+}
+
+QMenuBar::item:pressed {
+    background-color: var(--bg-selected);
+    color: var(--fg-selected);
+}
+
+QMenu {
+    background-color: var(--bg-base);
+    color: var(--fg-base);
+    border: var(--border-width) solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-sm) 0; /* Vertical padding */
+}
+
+QMenu::item {
+    padding: var(--spacing-sm) var(--spacing-xl); /* More horizontal padding */
+    background: transparent;
+}
+
+QMenu::item:selected { /* Hover/Selection */
+    background-color: var(--bg-selected);
+    color: var(--fg-selected);
+    border-radius: var(--radius-sm); /* Apply radius to selected item */
+}
+QMenu::item:disabled {
+    color: var(--fg-muted);
+    background-color: transparent;
+}
+
+QMenu::separator {
+    height: var(--border-width);
+    background-color: var(--border-base);
+    margin: var(--spacing-sm) var(--spacing-md);
+}
+
+QMenu::icon {
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-xs);
+    width: 16px; /* Ensure consistent icon space */
+}
+
+
+/* ==========================================================================
+   10. ToolBar
+   ========================================================================== */
+QToolBar {
+    background-color: var(--bg-alt);
+    border: none;
+    border-bottom: var(--border-width) solid var(--border-base);
+    padding: var(--spacing-xs);
+    spacing: var(--spacing-sm);
+}
+
+/* Inherit ToolButton styles */
+QToolBar QToolButton {
+    /* Uses base QToolButton style */
+    min-width: 1.8em; /* Ensure square-ish buttons */
+}
+
+/* Specific adjustments for toolbar widgets */
+QToolBar QComboBox {
+    min-width: 100px;
+    max-width: 180px;
+    margin: 1px var(--spacing-sm);
+    padding: 2px var(--spacing-sm);
+    min-height: 1.6em; /* Slightly smaller for toolbar */
+}
+
+QToolBar::separator {
+    background-color: var(--border-base);
+    width: var(--border-width);
+    margin: var(--spacing-sm) var(--spacing-sm);
+}
+
+/* ==========================================================================
+   11. StatusBar
+   ========================================================================== */
+QStatusBar {
+    background-color: var(--bg-alt);
+    color: var(--fg-muted);
+    border-top: var(--border-width) solid var(--border-base);
+}
+
+QStatusBar::item {
+    border: none; /* Remove default sunken look */
+}
+
+QStatusBar QLabel { /* Style labels within status bar */
+    padding: 0 var(--spacing-md);
+}
+QStatusBar QLabel#AIStatusLabel { /* Example: Specific styling */
+    font-weight: bold;
+}
+
+
+/* ==========================================================================
+   12. DockWidget
+   ========================================================================== */
+QDockWidget {
+    titlebar-close-icon: url(:/qt-project.org/styles/commonstyle/images/close-normal.png); /* Example */
+    titlebar-normal-icon: url(:/qt-project.org/styles/commonstyle/images/undock-normal.png); /* Float */
+}
+
+QDockWidget::title {
+    text-align: left;
+    background: var(--bg-alt);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: var(--border-width) solid var(--border-base);
+    border-bottom-color: var(--border-strong); /* Stronger bottom border */
+    font-weight: bold;
+    color: var(--fg-muted);
+}
+
+QDockWidget::close-button, QDockWidget::float-button {
+    /* Use system default buttons if possible, styling is complex */
+    border-radius: var(--radius-sm);
+    padding: 2px;
+}
+QDockWidget::close-button:hover, QDockWidget::float-button:hover {
+    background-color: var(--bg-hover);
+}
+
+
+/* ==========================================================================
+   13. Splitter
+   ========================================================================== */
+QSplitter::handle {
+    background-color: var(--border-base);
+}
+QSplitter::handle:horizontal { width: 1px; height: 4px; image: none; } /* Thinner visual handle */
+QSplitter::handle:vertical { height: 1px; width: 4px; image: none; }
+QSplitter::handle:hover { background-color: var(--border-strong); }
+QSplitter::handle:pressed { background-color: var(--bg-accent); }
+
+
+/* ==========================================================================
+   14. GroupBox
+   ========================================================================== */
+QGroupBox {
+    border: var(--border-width) solid var(--border-base);
+    border-radius: var(--radius-base);
+    margin-top: 1.5ex; /* Space for title */
+    padding: 1ex var(--spacing-md) var(--spacing-md) var(--spacing-md); /* Top padding adjusts */
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 var(--spacing-sm);
+    left: var(--spacing-md); /* Indent title */
+    color: var(--fg-muted);
+    /* background-color: var(--bg-base); Let title sit on margin */
+}
+
+
+/* ==========================================================================
+   15. CheckBox
+   ========================================================================== */
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    border: var(--border-width) solid var(--border-base);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-inset);
+}
+QCheckBox::indicator:hover {
+    border-color: var(--border-strong);
+}
+QCheckBox::indicator:focus {
+    border-color: var(--border-accent);
+}
+QCheckBox::indicator:checked {
+    image: url(:/qt-project.org/styles/commonstyle/images/checkbox-checked-light.png); /* Adapt path */
+    background-color: var(--bg-accent);
+    border-color: var(--bg-accent);
+}
+*[darkMode="true"] QCheckBox::indicator:checked {
+    image: url(:/qt-project.org/styles/commonstyle/images/checkbox-checked-dark.png);
+}
+QCheckBox::indicator:disabled {
+    background-color: var(--bg-disabled);
+    border-color: var(--border-base);
+}
+QCheckBox::indicator:checked:disabled {
+    image: url(:/qt-project.org/styles/commonstyle/images/checkbox-checked-disabled-light.png);
+}
+*[darkMode="true"] QCheckBox::indicator:checked:disabled {
+    image: url(:/qt-project.org/styles/commonstyle/images/checkbox-checked-disabled-dark.png);
+}
+QCheckBox {
+    spacing: var(--spacing-sm);
+    padding: var(--spacing-xs) 0;
+}
+QCheckBox:disabled { color: var(--fg-muted); }
+
+
+/* ==========================================================================
+   16. ProgressDialog / ProgressBar
+   ========================================================================== */
+QProgressDialog {
+    /* Inherits Dialog styles */
+}
+QProgressBar {
+    border: var(--border-width) solid var(--border-base);
+    border-radius: var(--radius-base);
+    background-color: var(--bg-inset);
+    text-align: center;
+    color: var(--fg-base);
+    min-height: 1.5em;
+}
+QProgressBar::chunk {
+    background-color: var(--bg-accent);
+    border-radius: var(--radius-base); /* Match parent radius */
+    margin: 1px; /* Creates inset effect */
+}
+*[darkMode="true"] QProgressBar { color: var(--fg-base); } /* Ensure text visible */

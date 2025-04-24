@@ -2,8 +2,7 @@
 
 **NotaNova** is an AI-Powered, cross-platform Markdown note-taking application built with Python and PyQt6. It aims to provide a seamless experience for creating, organizing, and enhancing your notes with modern features.
 
-![Screenshot Placeholder](placeholder.png)
-*(Add a screenshot of the application here)*
+![Screenshot](screenshot/screenshot-prealpha.png)
 
 ---
 
